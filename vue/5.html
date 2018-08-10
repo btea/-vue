@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="https://cn.vuejs.org/images/logo.png" type="image/png">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Vue组件</title>
+</head>
+<body>
+    <div id="components">
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+    </div>
+    <li class="one">邮箱注册</li>
+    <li class="two">名字</li>
+    <!-- 全局注册和局部注册 -->
+    <div id="component-prop">
+        <blog-post title="My journey with Vue"></blog-post>
+        <blog-post title="Blogging with Vue"></blog-post>
+        <blog-post title="Why Vue is so fun"></blog-post>
+    </div>
+    <div id="component-prop1">
+        <blog-post v-for="post in posts" v-bind:key="post.id" v-bind:title="post.title"></blog-post>
+    </div>
+    <br>
+    <div id="blog-posts-events-demo">
+        <div :style="{fontSize: postFontSize + 'em'}">
+            <post-event v-for="post in posts" v-bind:post="post" v-bind:key="post.id" v-on:enlarge-text="postFontSize += 0.1"></post-event>
+        </div>
+    </div>
+
+    <script>
+        // 全局注册，所有的vue实例均可使用
+        Vue.component('button-counter',{
+
+            // 一个组件的data必须是一个函数
+            
+            data: function(){
+                return {
+                    count: 0
+                }
+            },
+            template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+        })
+        new Vue({
+            el: '#components'
+        })
+
+        // 通过Prop向子组件传递数据
+        Vue.component('blog-post',{
+            props: ['title'],
+            template: '<h3>{{title}}</h3>'
+        })
+        new Vue({
+            el: '#component-prop'
+        })
+
+        new Vue({
+            el: '#component-prop1',
+            data: {
+                posts: [
+                    {
+                        id: 0,
+                        title: 'one'
+                    },
+                    {
+                        id: 1,
+                        title: 'two'
+                    },
+                    {
+                        id: 2,
+                        title: 'three'
+                    }
+                ]
+            }
+        })
+
+        // 通过事件向父组件发送消息
+        Vue.component('post-event',{
+            props: ['post'],
+            template: `
+                <div class="post-event">
+                    <h3>{{post.title}}</h3>
+                    <button v-on:click="$emit('enlarge-text')">Enlarge Text</button>
+                </div>
+            `
+        })
+        new Vue({
+            el: '#blog-posts-events-demo',
+            data: {
+                postFontSize: 1,
+                posts: [
+                    {
+                        id: 0,
+                        title: 'this is one'
+                    },
+                    {
+                        id: 1,
+                        title: 'this is two'
+                    },
+                    {
+                        id: 2,
+                        title: 'this is three'
+                    }
+                ]
+            }
+        })
+
+    </script>
+</body>
+</html>

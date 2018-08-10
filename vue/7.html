@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组件注册</title>
+    <link rel="icon" href="https://cn.vuejs.org/images/logo.png" type="image/png">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    
+    <div id="component">
+        <component-a></component-a>
+    </div>
+
+    <script>
+        // 全局注册组件
+        // Vue.component
+
+        // 局部注册组件
+        var componentA = {
+            template:  `
+                <div v-on:click="get">this i a component</div>
+            `,
+            methods: {
+                get: function(){
+                    alert('弹窗');
+                }
+            }
+        };
+        new Vue({
+            el: '#component',
+            components: {
+                'component-a': componentA
+            }
+        })
+    </script>
+</body>
+</html>

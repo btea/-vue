@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>form表单输入绑定</title>
+    <link rel="icon" href="https://cn.vuejs.org/images/logo.png" type="image/png">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="input">
+        <input type="checkbox" id="checkbox" v-model="checked">
+        <label for="checkbox">{{checked}}</label>
+    </div>
+    <div id="input1">
+        <input type="checkbox" id="z" value="z" v-model="checkedNames">
+        <label for="z">z</label>
+        <input type="checkbox" id="y" value="y" v-model="checkedNames">
+        <label for="y">y</label>
+        <input type="checkbox" id="s" value="s" v-model="checkedNames">
+        <label for="s">s</label>
+        <br>
+        <span>checkedNames list: {{checkedNames}}</span>
+    </div>
+
+    <br><br>
+    <div id="radio">
+        <input type="radio" id="one" value="One" v-model="picked" />
+        <label for="one">One</label>
+        <input type="radio" id="two" value="two" v-model="picked" />
+        <label for="two">Two</label>
+        <br>
+        <span>Picked : {{picked}}</span>
+    </div>
+    <br>
+    <div id="select">
+        <select v-model="selected">
+            <option value="" disabled>请选择</option>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+        </select>
+        <span>Selected: {{selected}}</span>
+    </div>
+
+    <div id="modifier">
+        <input v-model.lazy="msg">
+        <span>{{msg}}</span>
+        <br>
+        <input v-model.number="age" type="number">
+        <span>{{age}}</span>
+        <br>
+        <input v-model.trim="msg">
+    </div>
+    
+
+    <script>
+        new Vue({
+            el: '#input',
+            data: {
+                checked: false
+            }
+        })
+        new Vue({
+            el: '#input1',
+            data: {
+                checkedNames: []
+            }
+        })
+        
+        new Vue({
+            el: '#radio',
+            data: {
+                picked: ''
+            }
+        })
+        new Vue({
+            el: '#select',
+            data: {
+                selected: ''
+            }
+        })
+        new Vue({
+            el: '#modifier',
+            data: {
+                msg: 'hello',
+                age: 10
+            }
+        })
+    </script>
+</body>
+</html>

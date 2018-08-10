@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>render function && jsx</title>
+    <link rel="icon" href="https://cn.vuejs.org/images/logo.png" type="image/png">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="render">
+        <anchored-heading :level="1">
+            hello World!
+        </anchored-heading>
+    </div>
+
+    <script type="text/x-template" id="anchored-heading-template">
+        <h1 v-if="level === 1">
+            <slot></slot>
+        </h1>
+        <h2 v-else-if="level === 2">
+            <slot></slot>
+        </h2>
+        <h3 v-else-if="level === 3">
+            <slot></slot>
+        </h3>
+        <h4 v-else-if="level === 4"> 
+            <slot></slot>
+        </h4>
+        <h5 v-else-if="level === 5">
+            <slot></slot>
+        </h5>
+        <h6 v-else-if="level === 6">
+            <slot></slot>
+        </h6>
+    </script>
+    <script>
+        // Vue.component('anchored-heading',{
+        //     template: '#anchored-heading-template',
+        //     props: {
+        //         level: {
+        //             type: Number,
+        //             required: true
+        //         }
+        //     }
+        // })
+        Vue.component('anchored-heading',{
+            render: function(createElement){
+                console.log(createElement);
+                console.log(this);
+                return createElement(
+                    'h' + this.level, //tag name 标签名称
+                    this.$slot.default // 子组件中的阵列
+                )
+            },
+            props: {
+                level: {
+                    type: Number,
+                    required: true
+                }
+            }
+        })
+        new Vue({
+            el: '#render'
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>mixins</title>
+    <link rel="icon" href="https://cn.vuejs.org/images/logo.png" type="image/png">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <script>
+        var mixin = {
+            data: function(){
+                return {
+                    message: 'hello',
+                    foo: 'abc'
+                }
+            }
+        }
+        new Vue({
+            mixins: [mixin],
+            data: function(){
+                return {
+                    message: 'goodbye',
+                    bar: 'def'
+                }
+            },
+            created: function(){
+                console.log(this.$data);
+            }
+        })
+        
+        // 同名钩子函数将被混合为一个数组，因此都将被调用。另外，混入对象的钩子将在组件自身钩子之前调用
+        var mixin1 = {
+            created: function(){
+                console.log('混入对象的钩子被调用')
+            }
+        }
+        new Vue({
+            mixins: [mixin1],
+            created: function(){
+                console.log('组件钩子被调用');
+            }
+        })
+
+        // 值为对象的选项，例如methods，components，和directives将被混合为同一个对象。两个对象键名冲突时，取组件对象的键值对。
+        var mixin2 = {
+            methods: {
+                foo: function(){
+                    console.log('foo');
+                },
+                conflicting: function(){
+                    console.log('from mixin');
+                }
+            }
+        }
+        var vm = new Vue({
+            mixins: [mixin2],
+            methods: {
+                bar: function(){
+                    console.log('bar');
+                },
+                conflicting: function(){
+                    console.log('from self')
+                }
+            }
+        })
+        vm.foo();
+        vm.bar();
+        vm.conflicting();
+
+
+        // 全局混入
+        // 也可以全局注册混入对象。注意使用！一旦使用全局混入对象，将会影响到所有之后创建的Vue实例。
+        // 使用恰当时，可以为自定义对象注入处理逻辑。
+        Vue.mixin({
+            created: function(){
+                var myOption = this.$options.myOption;
+                if(myOption){
+                    console.log(myOption);
+                    console.log(this.a);
+                }
+            }
+        })
+        new Vue({
+            myOption: 'hello!',
+            data: {
+                a: 'world'
+            }
+        })
+    </script>
+</body>
+</html>

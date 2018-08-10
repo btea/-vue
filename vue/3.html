@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue class与style绑定</title>
+    <link rel="icon" href="https://cn.vuejs.org/images/logo.png" type="image/png">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .static{
+            font-size: 20px;
+            background: '#6cf';
+            opacity: .5;
+        }
+        .active{
+            border: #6cf solid 1px;
+            border-radius: 3px;
+        }
+        .text-danger{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="container" class="static" v-bind:class="{active: isActive, 'text-danger': hasError}" @click="getError" @mouseenter="getActive" @mouseleave="cancelActive">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, explicabo! 
+        Nisi expedita dicta doloribus laborum delectus eveniet culpa ipsum aut accusantium veritatis quae magnam iusto officia, 
+        neque voluptate illo id.
+    </div>
+    <br>
+    <div id="container1" class="static" v-bind:class="classObject" @click="getError" @mouseenter="getActive" @mouseleave="cancelActive">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, explicabo! 
+        Nisi expedita dicta doloribus laborum delectus eveniet culpa ipsum aut accusantium veritatis quae magnam iusto officia, 
+        neque voluptate illo id.
+    </div>
+    <br>
+    <div id="container2" v-bind:style="{color: activeColor, fontSize: fontSize + 'px'}">内联样式绑定</div>
+    <div id="container3" v-bind:style="styleObject">内联样式绑定</div>
+    <div id="container3" v-bind:style="[fontWeight,fontStyle]">内联样式绑定</div>
+    <script>    
+        new Vue({
+            el: '#container',
+            data: {
+                isActive: false,
+                hasError: false
+            },
+            methods: {
+                getActive: function(){
+                    this.isActive = true;
+                },
+                cancelActive: function(){
+                    this.isActive = false;
+                },
+                getError: function(){
+                    this.hasError = !this.hasError;
+                }
+            }
+        })
+        new Vue({
+            el: '#container1',
+            data: {
+                isActive: false,
+                hasError: false
+            },
+            computed: {
+                classObject: function(){
+                    return {
+                        active: this.isActive,
+                        'text-danger': this.hasError
+                    }
+                }
+            },
+            methods: {
+                getActive: function(){
+                    this.isActive = true;
+                },
+                cancelActive: function(){
+                    this.isActive = false;
+                },
+                getError: function(){
+                    this.hasError = !this.hasError;
+                }
+            }
+        })
+        new Vue({
+            el: '#container2',
+            data: {
+                activeColor: '#6cf',
+                fontSize: 20,
+            }
+        })
+        new Vue({
+            el: '#container3',
+            data: {
+                styleObject: {
+                    color: 'rgba(36,144,225,.5)',
+                    fontSize: '25px'
+                },
+                fontWeight: 800,
+                fontStyle: 'italic'
+            }
+        })
+    </script>
+</body>
+</html>

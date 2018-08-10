@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue</title>
+    <link rel="icon" href="https://cn.vuejs.org/images/logo.png" type="image/png">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <span v-bind:title="message">
+            鼠标悬停几秒查看此处动态绑定的提示信息!
+        </span>
+        <span :title    ='message'>
+            鼠标悬停
+        </span>
+    </div>
+    <div id="app1">
+        <ol>
+            <toto v-for="item in groceryList" :todo="item" :key="item.id"></toto>
+        </ol>
+    </div>
+    <div id="app2">
+        <p>Origin message： "{{message}}"</p>
+        <p>Computed reversed message: "{{reversedMessage}}"</p>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: '页面加载于' + new Date().toLocaleString()
+            }
+        })
+        Vue.component('toto',{
+            props: ['todo'],
+            template: '<li title="this">{{todo.text}}</li>'
+        })
+        var app1 = new Vue({
+            el: '#app1',
+            data: {
+                groceryList: [
+                    {id: 0, text: '蔬菜'},
+                    {id: 1, text: '奶酪'},
+                    {id: 2, text: '吃的'}
+                ]
+            },
+            beforeCreate(){
+                console.log('%cbeforeCreate','color:#6cf')
+            },
+            created(){
+                console.log('%ccreated','color:#6cf')
+            },
+            beforeMount(){
+                console.log('%cbeforeMount','color:#6cf')
+            },
+            mounted(){
+                console.log('%cmounted','color:#6cf')
+            },
+            beforeUpdate(){
+                console.log('%cbeforeUpdate','color:blue')
+            },
+            updated(){
+                console.log('%cupdated','color:blue')
+            },
+            beforeDestory(){
+                console.log('%cbeforeDestory','color:red');
+            },
+            destoryed(){
+                console.log('%cdestoryed','color:red')
+            }
+        })
+        
+
+        var app2 = new Vue({
+            el: '#app2',
+            data: {
+                message: 'hello world'
+            },
+            computed: {
+                // 计算属性的getter
+                reversedMessage: function(){
+                    return this.message.split('').reverse().join('');
+                }
+            }
+        })
+    </script>
+</body>
+</html>

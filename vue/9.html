@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>slot插槽</title>
+    <link rel="icon" href="https://cn.vuejs.org/images/logo.png" type="image/png">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="base-layout">
+        <base-layout>
+            <header slot="header">
+                this is header
+            </header>
+            <main>
+                main message
+            </main>
+            <div>默认插槽匹配的是所有没添加slot属性的元素</div>
+            <footer slot="footer">hello footer</footer>
+        </base-layout>
+    </div>
+    <div id="template">
+        <button-component>
+            
+        </button-component>
+    </div>
+    <script>
+        Vue.component('base-layout',{
+            template: `
+                <div>
+                    This is a small component
+                    <slot name="footer"></slot>
+                    <slot></slot>
+                </div>
+            `
+        })
+        new Vue({
+            el: '#base-layout'
+        })
+
+
+        Vue.component('button-component',{
+            template: `
+                <button>
+                    <slot>Save</slot>
+                </button>
+            `
+        })
+        new Vue({
+            el: '#template'
+        })
+    </script>
+</body>
+</html>

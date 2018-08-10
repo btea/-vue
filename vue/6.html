@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>通过插槽分发内容</title>
+    <link rel="icon" href="https://cn.vuejs.org/images/logo.png" type="image/png">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .demo-alert-box{
+            border: 1px  solid #f09898;
+            background: #f3beb8
+        }
+    </style>
+</head>
+<body>
+    <div id="slot">
+        <alert-box>
+            Something bad happened.
+            <div>this is a div</div>
+        </alert-box>
+    </div>
+    
+
+    <script>
+        Vue.component('alert-box',{
+            template: `
+                <div class="demo-alert-box">
+                    <strong>Error!</strong>
+                    <slot></slot>
+                </div>
+            `
+        });
+        new Vue({
+            el: '#slot'
+        })
+    </script>
+</body>
+</html>
