@@ -4,17 +4,29 @@
         <div class="one">
             this ia box
         </div>
-        <div class="two">
-            this is another box
+        <div class="two" v-on:click="get">
+            23333333
         </div>
+        <Banner> </Banner>
     </section>
 </template>
 <script>
+
+import Banner from './banner.vue'
+
 export default {
     data(){
         return {
             name: 'webpack + vue'
         }
+    },
+    methods: {
+        get: function(){
+            alert(123);
+        }
+    },
+    components: {
+        Banner
     }
 }
 </script>

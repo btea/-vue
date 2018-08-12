@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import App from './pages/app.vue';
+import App from './components/app.vue';
 
 const app = new Vue({
     el: '#app',
