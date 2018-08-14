@@ -5,20 +5,46 @@ import home from './home.vue';
 import about from './about.vue';
 import user from './user.vue';
 
+// 二级组件
+import phone from './phone.vue';
+import tablet from './tablet.vue';
+import computer from './computer.vue';
+
+
 Vue.use(VueRouter);
 
 const routes = [
     {
         path: '/home',
-        component: home
+        component: home,
+        // 二级组件
+        children: [
+            {
+                path: "phone",
+                component: phone
+            },
+            {
+                path: "tablet",
+                component: tablet
+            },
+            {
+                path: 'computer',
+                component: computer
+            },
+            {
+                // 当进入home组件的时候渲染下面组件
+                path: '',
+                component: phone
+            }
+        ]
     },
     {
         path: '/about',
         component: about
     },
-    // 动态路由
+    // 动态路由  动态路由共用的同一个组件 当第一次组件渲染完成之后，之后的是组件复用，生命周期不再生效
     {
-        path: '/user:id',
+        path: '/user/:id',
         component: user
     },
     // 这时点击页面上的home和about可以看到组价来回切换。但是有一个问题，当首次进入页面的时候，页面中并没有显示任何内容。这是因为首次进入页面时，它的路径是'/',我们并没有给这个路径做相应的配置。一般，
