@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>dynamic router</title>
+    <link rel="icon" href="https://cn.vuejs.org/images/logo.png" type="image/png">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+    <!-- 我们经常需要把某种模式匹配到的所有路由，全部隐射到同个组件。例如，我们有一个User组件，
+    对于所有ID各不相同的用户，都要使用这个组件来渲染。那么，我们可以在vue-router的路由路径中使用
+    '动态路径参数(dynamic segment)' 来达到这个效果： -->
+    <div id="app">
+        <p>
+            <router-link to="/user/foo">/user/foo</router-link>
+            <router-link to="/user/bar">/user/bar</router-link>
+        </p>
+        <router-view></router-view>
+    </div>
+
+    <script>
+        const User = {
+            template: '<div>{{$route.params.id}}</div>'
+        }
+        const router = new VueRouter({
+            routes: [
+                {path: '/user/:id',component: User}
+            ]
+        })
+        new Vue({
+            router
+        }).$mount('#app');
+    </script>
+</body>
+</html>
