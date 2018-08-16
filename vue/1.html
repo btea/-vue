@@ -13,18 +13,19 @@
         <span v-bind:title="message">
             鼠标悬停几秒查看此处动态绑定的提示信息!
         </span>
-        <span :title    ='message'>
+        <span :title='message'>
             鼠标悬停
         </span>
     </div>
     <div id="app1">
         <ol>
-            <toto v-for="item in groceryList" :todo="item" :key="item.id"></toto>
+            <toto v-for="item in groceryList" :todo="item" :key="item.id" :ss="abc"></toto>
         </ol>
     </div>
     <div id="app2">
         <p>Origin message： "{{message}}"</p>
         <p>Computed reversed message: "{{reversedMessage}}"</p>
+        <input type="file" name="" id="file" @change="getFile"/>
     </div>
     <script>
         var app = new Vue({
@@ -35,7 +36,13 @@
         })
         Vue.component('toto',{
             props: ['todo'],
-            template: '<li title="this">{{todo.text}}</li>'
+            // 自定义组件的数据内容只能在组件内容里面使用
+            data: function(){
+                return {
+                    abc: 123
+                }
+            },
+            template: '<li title="this" :z="abc">{{todo.text}}{{abc}}</li>'
         })
         var app1 = new Vue({
             el: '#app1',
@@ -44,7 +51,8 @@
                     {id: 0, text: '蔬菜'},
                     {id: 1, text: '奶酪'},
                     {id: 2, text: '吃的'}
-                ]
+                ],
+                abc: 1234
             },
             beforeCreate(){
                 console.log('%cbeforeCreate','color:#6cf')
@@ -82,6 +90,22 @@
                 // 计算属性的getter
                 reversedMessage: function(){
                     return this.message.split('').reverse().join('');
+                }
+            },
+            methods: {
+                getFile: function(e){
+                    var file = e.target.files[0];
+                    var reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = function(theFile){
+                        var image = new Image();
+                        image.src = theFile.target.result;
+                        image.onload = function(){
+                            console.log(this);
+                            console.log(this.width);
+                            console.log(this.height);
+                        }
+                    }
                 }
             }
         })
