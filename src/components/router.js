@@ -10,6 +10,10 @@ import phone from './phone.vue';
 import tablet from './tablet.vue';
 import computer from './computer.vue';
 
+// 命名组件
+import z from './z';
+
+console.log(z);
 
 Vue.use(VueRouter);
 
@@ -41,6 +45,8 @@ const routes = [
     {
         path: '/about',
         component: about
+
+        // 命名视图
     },
     // 动态路由  动态路由共用的同一个组件 当第一次组件渲染完成之后，之后的是组件复用，生命周期不再生效
     {
