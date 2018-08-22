@@ -1,7 +1,7 @@
 {
     "background.useDefault": false,
     "background.customImages": [
-        "file://C:/Users/ZYS13/Pictures/img/bizhi/bili49.png"    
+        "file://C:/Users/ZYS13/Pictures/img/bizhi/bili40.png"    
     ],
     "background.style": {
         "content": "''",
@@ -12,6 +12,7 @@
         "height": "100%",
         "background-position": "100% 100%",
         "background-repeat": "no-repeat",
-        "opacity": 0.5
+        "background-size": "cover",
+        "opacity": 0.1
       },
 }

@@ -3,6 +3,7 @@
         <h1>User</h1>
         <div>我是User组件</div>
         <div>动态部分{{dynamicSegment}}</div>
+        <textarea ref="text" style="margin:0;padding:0;overflow:hidden;word-warp:break-word;resize:none;width:300px;border:1px solid #6cf;border-radius:5px" @input="getChange" :style="{height: height + 'px'}"></textarea>
     </div>
 </template>
 <script>
@@ -11,7 +12,25 @@ export default {
     // 就是当第一次点击（如：user123）的时候，vue 把对应的组件渲染出来，但在user123, user456点击来回切换的时候，
     // 这个组件就不会发生变化了，组件的生命周期不管用了。这时如果想要在组件来回切换的时候做点事情，那么只能在组件内部（user.vue中）
     // 利用watch 来监听$route 的变化。把上面的代码用监听$route 实现    
-    
+    methods: {
+        getChange: function(){
+            let scrollHeight = this.$refs.text.scrollHeight;
+            console.log(scrollHeight);
+            console.log(this.height);
+            this.$refs.text.style.height = '';
+            if(scrollHeight > this.height){
+                this.height = scrollHeight
+            }
+
+        }
+    },
+
+    data: function(){
+        return {
+            height: 50
+        }
+    },
+
     computed: {
         dynamicSegment(){
             console.log(this.$route);
