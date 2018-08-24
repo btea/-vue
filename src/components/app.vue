@@ -7,11 +7,13 @@
         <div class="two" v-on:click="get">
             23333333
         </div>
+        <input type="text" disabled>
         <Banner> </Banner>
         <div>
             <router-link to="/home">Home</router-link>
             <!-- <router-link to="/about">About</router-link> -->
-            <span @click="pushRoute">About</span>
+            <!-- <span @click="pushRoute">About</span> -->
+            <a href="/#/about">About</a>
             <!-- 模糊匹配，动态路由 -->
             <router-link to="/user/123">User123</router-link>
             <router-link to="/user/456">User456</router-link>
