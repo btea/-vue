@@ -11,6 +11,12 @@
             <div class="item">5</div>
             <div class="item">6</div>
         </div>
+        <div class="trans">
+            <div class="top">this is top</div>
+            <div class="bottom">this is bottom</div>
+        </div>
+        <br>
+        <br>
     </div>
 </template>
 <script>
@@ -51,6 +57,20 @@ export default {
 }
 </script>
 <style>
+    .trans{
+        width: 150px;
+        height: 20px;
+    }
+    .top,.bottom{
+        width: 100%;
+        height: 100%;
+        background: #6cf;
+        text-align: center;
+        line-height: 20px;
+        vertical-align: middle;
+        border: 1px solid #ffffff;
+    }
+
     .carousel{
         width: 500px;
         height: 150px;
