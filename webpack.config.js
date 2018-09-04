@@ -39,7 +39,7 @@ module.exports = {
     // alias: {
       // 'vue$': 'vue/dist/vue.esm.js'
     // }
-    extensions: ['.js','.vue','json'] //自动补全的扩展名
+    extensions: ['.js','.vue','.json'] //自动补全的扩展名
   },
   plugins: [
       new VueLoaderPlugin(),
