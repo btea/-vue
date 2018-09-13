@@ -15,7 +15,7 @@
 
             如果使用字符串模板，那么这个限制就不存在了
         -->
-        <blog-post post-title="hello"></blog-post>
+        <blog-post post-title="hello" num="123"></blog-post>
         <!-- 静态prop -->
         <!-- <blog-post title="My journey with Vue"></blog-post> -->
         <!-- 通过v-bind动态赋值prop -->
@@ -54,8 +54,8 @@
         
 
         Vue.component('blog-post',{
-            props: ['postTitle'],
-            template: `<h3>{{postTitle}}</h3>`
+            props: ['postTitle','num'],
+            template: `<h3>{{postTitle}},{{num}}</h3>`
         })
         new Vue({
             el: '#prop'
