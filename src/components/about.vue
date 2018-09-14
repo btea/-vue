@@ -22,7 +22,7 @@ export default {
     },
     mounted: function(){
         var carousel = document.getElementsByClassName('carousel')[0];
-        setInterval(function(){
+        this.setInterval = setInterval(function(){
             var item = document.getElementsByClassName('item');
             item[1].style.left = 0;
             item[1].style.top = '25px';
@@ -47,6 +47,9 @@ export default {
             item[0].style.left = '1200px';
             carousel.appendChild(carousel.firstChild);
         },1500)
+    },
+    destroyed: function(){
+        clearInterval(this.setInterval);
     }
 }
 </script>
