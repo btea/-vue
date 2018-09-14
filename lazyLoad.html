@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>lazyLoad </title>
+    <style>
+        img{
+            width: 100px;
+            height: 50px;
+            margin: 200px 0;
+        }
+    </style>
+</head>
+<body>
+    <!--lazyload属性暂时没生效 2018/9/14-->
+    <img lazyload="on" data-src="http://p3.music.126.net/Qe2kES5gSP8Ouw9uRnJdWg==/19001759951550984.jpg" alt="" />
+    <br>
+    <img lazyload="on" data-src="http://p3.music.126.net/gEZhg7Hxx9Sh7pAt3fG9nA==/76965813961931.jpg" alt="" />
+    <br>
+    <img lazyload="off" data-src="http://p4.music.126.net/AXbR_d4pB-QwK7EkK72U_Q==/109951163134772904.jpg" alt="" />
+    <br>
+    <img lazyload="on" data-src="http://p3.music.126.net/o7rD8F1Zz9Az74rf50hDJQ==/3385396303337206.jpg" alt="" />
+
+
+
+    <script>
+        var img = document.getElementsByTagName('img');
+        var height = window.screen.height;
+        var timer;
+        function lazyLoad(){
+            [].forEach.call(img,function(item){
+                var position = item.getBoundingClientRect(),
+                    top = position.top; 
+                if(!item.src){
+                    if(top <= height){
+                        var src = item.getAttribute('data-src');
+                        item.src = src;
+                    }
+                }    
+            })
+        }
+        window.onscroll = function(){
+            if(timer){
+                clearTimeout(timer);
+                timer = setTimeout(lazyLoad,500);
+            }else{
+                timer = setTimeout(lazyLoad,500);
+            }
+        }
+        lazyLoad();
+    </script>
+</body>
+</html>
