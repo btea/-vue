@@ -30,11 +30,12 @@
         <div class="slide">一个滑动框</div><br>
         <div class="left">从左往右滑</div><br>
         <div class="right">从右往左滑</div>
+        <Map></Map>
     </section>
 </template>
 <script>
 import Banner from './banner'
-
+import Map from './map'
 export default {
     data(){
         return {
@@ -50,7 +51,8 @@ export default {
         }
     },
     components: {
-        Banner
+        Banner,
+        Map
     }
 }
 </script>
